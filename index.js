@@ -1,5 +1,45 @@
 const express = require('express');
 const path = require('path');
+
+const contactRoutes = require('./routes/contactRoutes');
+
+const app = express();
+const port = 3000;
+
+//pour parser le contenu de mon body
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+//pour utiliser mes elements static (image..)
+//app.use(express.static('public'));
+
+// Routes
+app.use('/', contactRoutes);
+
+app.listen(port, () => {
+  console.log(`Serveur lancé sur le port ${port}`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*const express = require('express');
+const path = require('path');
 const nodemailer = require('nodemailer');
 const app = express();
 const port = 3000;
@@ -13,7 +53,8 @@ app.use(express.json());
 
 
 
-// fonction log request
+// fonction log request/*
+/*
 const logRequest =(res,req, next) =>{
     console.log(`> ${new Date().toLocaleTimeString()}`)
 
@@ -63,7 +104,7 @@ app.post('/fichier/html', async (req,res)=>{
     const mailOptions = {
         from: 'contact.test1520',
 
-        /*tu met l'adresse qui recois*/
+        /*tu met l'adresse qui recois
         to : 'araf.chakib.m@gmail.com',
         subject:'demande de contact',
         html: `<h1> nouveau message </h1>
@@ -94,3 +135,4 @@ app.listen(port, () => {
     console.log(`Serveur lancé sur le port $(port)`);
 });
 
+*/
