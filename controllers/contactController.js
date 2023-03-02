@@ -1,5 +1,6 @@
 const mailService = require('../services/mailService');
 const path = require('path');
+require('dotenv').config();
 
 exports.getContactPage = (req, res) => {
   res.sendFile(path.join(__dirname, '../views/page.html'));
@@ -13,8 +14,8 @@ exports.sendContactForm = async (req, res) => {
     }
 
     const mailOptions = {
-      from: 'contact.test1520',
-      to: 'araf.chakib.m@gmail.com',
+      from: process.env.PRIVATE_USER,
+      to: process.env.PRIVATE_EMAIL,
       subject: 'Demande de contact',
       html: `<h1>Nouveau message</h1>
         <p>Email: ${req.body.email}</p>

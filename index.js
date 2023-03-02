@@ -10,8 +10,6 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//pour utiliser mes elements static (image..)
-//app.use(express.static('public'));
 
 // Routes
 app.use('/', contactRoutes);
