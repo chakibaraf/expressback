@@ -2,30 +2,31 @@ const mailService = require('../services/mailService');
 const path = require('path');
 require('dotenv').config();
 
-exports.getContactPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/page.html'));
-};
-
 exports.sendContactForm = async (req, res) => {
   try {
-    if (!req.body.email || !req.body.message) {
+    const { subject, email, message, nom } = req.body;
+    if (!email || !message) {
       const errorMessage = 'Veuillez remplir tous les champs requis.';
-      return res.status(400).redirect(`/fichier/html?message=${encodeURIComponent(errorMessage)}`);
+      return res.status(400).send({ error: errorMessage });
     }
 
     const mailOptions = {
       from: process.env.PRIVATE_USER,
       to: process.env.PRIVATE_EMAIL,
-      subject: 'Demande de contact',
-      html: `<h1>Nouveau message</h1>
-        <p>Email: ${req.body.email}</p>
-        <p>Message: ${req.body.message}</p>,
-        <p>Sujet: ${req.body.sujet}</p>`,
+      subject: subject || 'Demande de contact',
+      html: `<h1>Formulaire de contact site Internet</h1>
+      <p> Sujet :${subject}
+      <p>Nom: ${nom || 'Non renseigné'}</p>,
+      <p>Email: ${email}</p>
+      <p>Message: ${message}</p>`
     };
     await mailService.sendMail(mailOptions);
     res.send('Formulaire traité');
   } catch (error) {
     console.error(error);
-    res.status(500).send('Une erreur est survenue');
+    res.status(500).send({ error: 'Une erreur est survenue' });
   }
 };
+
+
+

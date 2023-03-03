@@ -1,21 +1,26 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
+require('dotenv').config();
 const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
-const port = 3000;
 
 //pour parser le contenu de mon body
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
+app.use(express.json());
+app.use(cors());
+
+const API_URL = process.env.API_URL || 'http://localhost';
+const API_PORT = process.env_API_PORT || 3001
 
 // Routes
 app.use('/', contactRoutes);
 
-app.listen(port, () => {
-  console.log(`Serveur lancé sur le port ${port}`);
+app.listen(API_PORT, () => {
+  console.log(`Serveur lancé sur le port ${API_PORT}`);
 });
 
 
