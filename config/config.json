@@ -1,0 +1,25 @@
+
+
+{
+  "development": {
+    "username": "root",
+    "password": "Root2512mdploup",
+    "database": "identification",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Root2512mdploup",
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "Root2512mdploup",
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

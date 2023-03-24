@@ -1,10 +1,18 @@
+
+/*********************************************************** */
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-
 require('dotenv').config();
 const contactRoutes = require('./routes/contactRoutes');
 
+/*************************************************************/
+/********************* variable d'environnement  ************************/
+const API_URL = process.env.API_URL || 'http://localhost';
+const API_PORT = process.env_API_PORT || 3001
+
+
+/***************   initialisation de l'API  ***********/
 const app = express();
 
 //pour parser le contenu de mon body
@@ -13,15 +21,40 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-const API_URL = process.env.API_URL || 'http://localhost';
-const API_PORT = process.env_API_PORT || 3001
+/*****************************************************/
+/** import de la connexion a la base de donnée */
+let DB = require('./db.config')
 
-// Routes
+/***************************************************************/
+
+/**import module de routage pour la bdd */
+const user_utilisateurs = require('./routes/usersRoute')
+const user_admin = require('./routes/adminRoute')
+
+
+const auth_router = require('./authenticate/authadmin')
+const auth_user = require('./authenticate/authUser')
+//************* */ mise en place du Routage **********************************/
 app.use('/', contactRoutes);
 
-app.listen(API_PORT, () => {
-  console.log(`Serveur lancé sur le port ${API_PORT}`);
-});
+app.use('/users', user_utilisateurs);
+app.use('/admins',user_admin)
+
+/**--------------authentification ------------------ */
+app.use('/auth',auth_router)
+app.use('/auth',auth_user)
+/************** demarrage server  avec base de donnée ******************************/
+DB.authenticate()
+    .then(() => console.log("Database connexion ok"))
+    .then(() => {
+
+        app.listen(API_PORT, () => {
+            console.log(`Serveur lancé sur le port ${API_PORT}`);
+        });
+    }).catch(err => console.log("database error", err))
+
+
+
 
 
 
