@@ -5,6 +5,7 @@ const express = require('express');
 const Admin = require('../models/admin');
 const bcrypt = require('bcrypt')
 
+//const isAdmin = require('../middleware/verificationAdmin');
 
 /************************************************/ 
 
@@ -15,9 +16,13 @@ const router = express.Router();
 /************************************************************ */
 
 /***  Routage de administrateur***/
-
+//middlewear qui permet la selection
+//router.use(isAdmin);
 
 /************************************************************ */
+/*router.get('/admin',  function(req, res) {
+  res.send('Bienvenue sur la page d\'administration');
+});*/
 
 /** pour afficher les administrateurs  */
 router.get('', async (req, res) => {

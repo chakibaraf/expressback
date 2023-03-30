@@ -10,6 +10,11 @@ const Admin = DB.define('Admin',{
             primaryKey: true,
             autoIncrement:true
         },
+        role: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "admin", // La valeur par défaut du rôle est "user".
+          },
         codeacces: {
             type:DataTypes.STRING(100),
             defaultValue:'',

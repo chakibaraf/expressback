@@ -11,6 +11,11 @@ const User = DB.define('User',{
             primaryKey: true,
             autoIncrement:true
         },
+        role: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "user", // La valeur par défaut du rôle est "user".
+          },
         nom:{
             type:DataTypes.STRING(100),
             defaultValue:'',

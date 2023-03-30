@@ -1,4 +1,4 @@
-const mailService = require('../services/mailService');
+const mailService = require('../middleware/mailService');
 const path = require('path');
 require('dotenv').config();
 

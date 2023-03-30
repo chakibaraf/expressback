@@ -1,4 +1,3 @@
-
 /*********************************************************** */
 const express = require('express');
 const path = require('path');
@@ -32,12 +31,17 @@ const user_utilisateurs = require('./routes/usersRoute')
 const user_admin = require('./routes/adminRoute')
 
 
+
 const auth_router = require('./authenticate/authadmin')
 const auth_user = require('./authenticate/authUser')
 //************* */ mise en place du Routage **********************************/
 app.use('/', contactRoutes);
 
+
 app.use('/users', user_utilisateurs);
+
+
+
 app.use('/admins',user_admin)
 
 /**--------------authentification ------------------ */

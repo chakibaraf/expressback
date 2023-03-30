@@ -21,7 +21,7 @@ router.post('/login',(req,res)=>{
     const { email, password } = req.body;
     /********verification des données recu */
     if(!email || !password ){
-        return res.statusCode(400).json({message:"mauvaise email /password"})
+        return res.status(400).json({message:"mauvaise email /password"})
     }
     Admin.findOne({where :{email:email}, raw: true})
         .then(admin => {
@@ -37,12 +37,13 @@ router.post('/login',(req,res)=>{
                     //generation du token jwt
                     const token = jwt.sign({
                         id:admin.id,
-                        nom:admin.nom,
-                        prenom:admin.prenom,
+                       nom:admin.nom,
+                       prenom:admin.prenom,
                         email:admin.email,
-                    },process.env.JWT_SECRET,{expiresIn: process.env.JWT_DURING} )
+                        role:admin.role,
+                    },process.env.ADMIN_JWT_SECRET,{expiresIn: process.env.JWT_DURING} )
 
-                    return res.json({acces_token:token})
+                    return res.json({acces_token:token,...admin})
                     //jwt.sign(payload, phrase secret, duree)
                 })
                 .catch(err => res.status(500).json({message:'login process fail',error:err}))
