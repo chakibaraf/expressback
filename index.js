@@ -8,7 +8,7 @@ const contactRoutes = require('./routes/contactRoutes');
 /*************************************************************/
 /********************* variable d'environnement  ************************/
 const API_URL = process.env.API_URL || 'http://localhost';
-const API_PORT = process.env_API_PORT || 3001
+const API_PORT = process.env_API_PORT || 8080
 
 
 /***************   initialisation de l'API  ***********/
