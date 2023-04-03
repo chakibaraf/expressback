@@ -46,8 +46,7 @@ router.post("/collection", (req, res) => {
             process.env.USER_JWT_SECRET,
             { expiresIn: process.env.JWT_DURING }
           );
-
-          return res.json({ acces_token: token });
+          return res.status(200).json({ access_token: token });
           //jwt.sign(payload, phrase secret, duree)
         })
         .catch((err) => {

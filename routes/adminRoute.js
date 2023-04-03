@@ -37,7 +37,7 @@ router.get('', async (req, res) => {
   });
 
   router.get('/role', middleware, (_req, res) => {
-    res.status(200).send('authorized !')
+    res.status(200).send('admin')
   })
 
 
