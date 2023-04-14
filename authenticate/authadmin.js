@@ -43,7 +43,7 @@ router.post('/login',(req,res)=>{
                         role:admin.role,
                     },process.env.ADMIN_JWT_SECRET,{expiresIn: process.env.JWT_DURING} )
 
-                    return res.json({acces_token:token,...admin})
+                    return res.json({access_token:token,...admin})
                     //jwt.sign(payload, phrase secret, duree)
                 })
                 .catch(err => res.status(500).json({message:'login process fail',error:err}))

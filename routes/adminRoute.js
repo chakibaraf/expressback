@@ -1,7 +1,7 @@
-
 /* import des modules nécessaire*/ 
 
 const express = require('express');
+const middleware = require('../middleware/verificationAdmin')
 const Admin = require('../models/admin');
 const bcrypt = require('bcrypt')
 
@@ -34,6 +34,10 @@ router.get('', async (req, res) => {
       res.status(500).json({ message: "Une erreur est survenue lors de la récupération des utilisateurs." });
     }
   });
+
+  router.get('/role', middleware, (_req, res) => {
+    res.status(200).send('admin')
+  })
 
 
 
