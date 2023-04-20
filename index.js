@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
-// requirements
->>>>>>> a109d1fa8515c263f773d3d8687448681accc652
+
 const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
