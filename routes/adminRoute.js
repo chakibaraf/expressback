@@ -129,4 +129,4 @@ router.delete('/', async (req, res) => {
     res.status(500).json({ message: "Une erreur est survenue lors de la suppression des administrateurs." });
   }
 });
-  module.exports = router;
+module.exports = router;
