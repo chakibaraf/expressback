@@ -8,6 +8,6 @@ const UserRoute = require("./usersRoute");
 route.use("/admins", AdminRoute);
 route.use("/users", UserRoute);
 route.use("/", ContactRoute);
-route.use("/card", CardRoute);
+route.use("/", CardRoute);
 
 module.exports = route;
