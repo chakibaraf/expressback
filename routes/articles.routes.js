@@ -1,5 +1,6 @@
 const express = require("express");
 const Article = require("../models/article");
+const fs = require('fs');
 const router = express.Router();
 
 router.post("/add", async (req, res) => {
@@ -7,7 +8,7 @@ router.post("/add", async (req, res) => {
     if (!req.files) return res.status(403).send("forbiden");
 
     const file = req.files.image;
-    // etre sur d'avoir que des images dans la requettes
+    // etre sur d'avoir que des images dans la requetes
     const type = file.mimetype.split("/")[0];
     if (type !== "image")
       return res.status(403).send("only images are allowed !");
@@ -21,11 +22,12 @@ router.post("/add", async (req, res) => {
     console.log(result);
 
     file.mv(`./public/${process.env.FILE_UPLOAD}/${fullName}`);
-    res.send("great one");
+    res.send("Article ajoute");
   } catch (error) {
     res.status(500).send(error.message);
   }
 });
+
 
 router.get("/", async (_req, res) => {
   try {
@@ -36,8 +38,28 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.post("/card", async (req, res) => {
+
+router.post("/cards", async (req, res) => {
   res.status(200).send(req.body);
+});
+
+
+
+
+
+router.delete("/card/:id", async (req, res) => {
+  try {
+    const card = await Article.findByPk(req.params.id);
+    if (!card) {
+      return res.status(404).send("article non trouve");
+    }
+    await Article.destroy({ where: { id: req.params.id } });
+    const imagePath = `./public/${process.env.FILE_UPLOAD}/${card.image}`;
+    fs.unlinkSync(imagePath); // Supprime l'image associée à la carte
+    res.send("Card supprimé succés");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 module.exports = router;

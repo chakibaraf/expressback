@@ -3,7 +3,7 @@ const DB = require('../db.config')
 
 /************************************/
 
-/** ************** definition du modele user */
+/** ************** definition du modele adminb */
 const Admin = DB.define('Admin',{
         id: {
             type: DataTypes.INTEGER(10),
@@ -13,7 +13,7 @@ const Admin = DB.define('Admin',{
         role: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "admin", // La valeur par défaut du rôle est "user".
+            defaultValue: "admin", // La valeur par défaut du rôle est "admin".
           },
         codeacces: {
             type:DataTypes.STRING(100),

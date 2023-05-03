@@ -3,8 +3,8 @@ const router = express.Router();
 
 const cardController = require('../controllers/cardController');
 
-//router.get('/contact', contactController.getContactPage);
-router.post(`/card`, cardController.sendCard);
+
+router.post(`/articles/cards`, cardController.sendCard);
 
 
 module.exports = router;

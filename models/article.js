@@ -3,7 +3,7 @@ const DB = require("../db.config");
 
 /************************************/
 
-/** ************** definition du modele user */
+/** ************** definition du modele article */
 const Article = DB.define(
   "Article",
   {

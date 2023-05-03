@@ -9,7 +9,7 @@ const ArticlesRoute = require("./articles.routes");
 route.use("/admins", AdminRoute);
 route.use("/users", UserRoute);
 route.use("/", ContactRoute);
-route.use("/card", CardRoute);
+route.post("/articles/cards", CardRoute);
 route.use("/articles", ArticlesRoute)
 
 module.exports = route;
